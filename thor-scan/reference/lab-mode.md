@@ -57,6 +57,8 @@ thor64.exe --lab -p S:\ --virtual-map S:C -j YOURHOSTNAME -e C:\reports
 ./thor-linux-64 --lab -p /mnt/image --virtual-map /mnt/image:C -j YOURHOSTNAME -e /reports
 ```
 
+**Note**: If the scan finishes too fast with minimal output, the mount may not be recognized as a local drive. Add `--alldrives` to include network/USB/mounted drives. See [common-pitfalls.md](../../thor-troubleshooting/reference/common-pitfalls.md) for details.
+
 ### Mounted Linux Image (on Linux)
 ```bash
 ./thor-linux-64 --lab -p /mnt/image --virtual-map /mnt/image:/ -j YOURHOSTNAME -e /reports

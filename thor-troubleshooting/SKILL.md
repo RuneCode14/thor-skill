@@ -17,6 +17,7 @@ Use these references when needed
 - AV/EDR interference patterns: reference/av-edr-interference.md
 - Diagnostics: reference/diagnostics.md
 - Performance and memory issues: reference/performance-and-resources.md
+- Common pitfalls (fast empty scans, wrong paths): reference/common-pitfalls.md
 
 Optional helper script
 - scripts/quick-env-check.sh: quick info dump about folder permissions, free space, CPU/RAM, and THOR files present.
