@@ -8,10 +8,12 @@ description: THOR Lens workflows for forensic timeline analysis. A web UI that i
 THOR Lens is a forensic timeline viewer that transforms THOR v11 audit trail files into an interactive exploration interface.
 
 **Critical Boundary**:
+
 - THOR Lens is a **web UI application** - users interact in the browser
 - The CLI handles **build**, **import**, and **serve** - not scanning
 - THOR Lens **does not scan** - it visualizes data from THOR scans
 - Requires **THOR v11** audit trail output (v10 does not produce this format)
+- **Not compatible with THOR Lite** - Lite cannot generate audit trail output
 
 ## Quickstart
 
@@ -80,3 +82,4 @@ make build
 2. Use `--virtual-map` and `-j` during THOR scans to preserve path/hostname context
 3. MCP stdio mode is recommended for Claude Code integration
 4. Never expose MCP HTTP endpoint publicly (no authentication)
+5. If user has THOR Lite, explain that Lens is not an option - Lite lacks audit trail capability. See [THOR Lite limitations](../thor-lite/reference/limitations.md).

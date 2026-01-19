@@ -4,6 +4,8 @@ Before running THOR, verify the environment.
 
 ## Binary Names by Platform
 
+### Full THOR
+
 | Platform | 64-bit Binary | 32-bit Binary |
 |----------|---------------|---------------|
 | Windows | `thor64.exe` | `thor.exe` |
@@ -11,6 +13,22 @@ Before running THOR, verify the environment.
 | macOS | `thor-macosx` | N/A |
 
 Always prefer 64-bit binaries. 32-bit versions have lower memory visibility and different registry/folder views on 64-bit systems.
+
+### THOR Lite (Free Version)
+
+| Platform | Scanner Binary | Utility Binary |
+|----------|----------------|----------------|
+| Windows | `thor64-lite.exe` | `thor-lite-util.exe` |
+| Linux | `thor-lite-linux-64` | `thor-lite-util` |
+| macOS | `thor-lite-macos` | `thor-lite-util` |
+
+THOR Lite is a free scanner with reduced features. See [THOR Lite Limitations](../../thor-lite/reference/limitations.md) for details on what's available.
+
+**How to identify THOR Lite:**
+- Binary name contains "lite"
+- Startup banner shows "Lite" in version header
+- Log output includes: "Some modules and features are not available in Lite version and will be disabled"
+- Disabled components listed with reasons like "Component is not available in THOR Lite" or "License restrictions"
 
 ## Minimum OS Versions
 

@@ -7,30 +7,35 @@ description: Run THOR scans and propose the exact command line for Windows, Linu
 Goal: produce a safe, reproducible THOR command line and minimal preflight checks.
 
 Rules
+
 - Prefer THOR v10 stable unless the user explicitly wants v11 TechPreview features.
 - Always start with environment detection: OS, THOR path, license presence, and whether thor-util exists.
-- Avoid “magic flags”. Explain why each non-trivial flag is used.
-- Default to focusing on forensic / lab workflows; if it’s live endpoint scanning, keep it conservative.
+- Identify if user has full THOR or THOR Lite (different binaries, different capabilities).
+- Avoid "magic flags". Explain why each non-trivial flag is used.
+- Default to focusing on forensic / lab workflows; if it's live endpoint scanning, keep it conservative.
 
 Preflight checklist
-1) Get the THOR install path (or infer from current working dir).
-2) Verify binaries exist:
-   - Windows: thor64.exe
-   - Linux: thor-linux-64
-   - macOS: thor-macosx
-3) Check license files (*.lic) in THOR dir.
-4) Check thor-util presence for update/diagnostics/report tasks.
-5) Identify scan target type:
+
+1. Get the THOR install path (or infer from current working dir).
+2. Verify binaries exist:
+   - Full THOR: `thor64.exe` (Windows), `thor-linux-64` (Linux), `thor-macosx` (macOS)
+   - THOR Lite: `thor64-lite.exe` (Windows), `thor-lite-linux-64` (Linux), `thor-lite-macos` (macOS)
+3. Check license files (*.lic) in THOR dir.
+4. Check thor-util presence for update/diagnostics/report tasks.
+5. Identify scan target type:
    - live path, mounted image, memory dump, extracted dumps, SSHFS-mounted remote
-6) Choose scan mode and output location; keep outputs deterministic.
+6. Choose scan mode and output location; keep outputs deterministic.
+7. If THOR Lite: note that lab mode and Sigma are unavailable. See [THOR Lite limitations](../thor-lite/SKILL.md).
 
 Use these references when needed
-- Environment detection: reference/env-detection.md
-- Scan modes overview: reference/scan-modes.md
-- Forensic lab mode: reference/lab-mode.md
-- Performance and threading: reference/performance.md
-- Output and reports: reference/output-and-reporting.md
-- Signature selectors/filters: reference/signature-filtering.md
+
+- Environment detection: [reference/env-detection.md](reference/env-detection.md)
+- Scan modes overview: [reference/scan-modes.md](reference/scan-modes.md)
+- Forensic lab mode: [reference/lab-mode.md](reference/lab-mode.md)
+- Performance and threading: [reference/performance.md](reference/performance.md)
+- Output and reports: [reference/output-and-reporting.md](reference/output-and-reporting.md)
+- Signature selectors/filters: [reference/signature-filtering.md](reference/signature-filtering.md)
+- THOR Lite limitations: [../thor-lite/reference/limitations.md](../thor-lite/reference/limitations.md)
 
 Example templates
 - examples/windows-live-scan.md
