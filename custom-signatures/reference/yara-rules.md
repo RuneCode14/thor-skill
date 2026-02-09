@@ -44,8 +44,45 @@ Tag in filename determines where rules are applied:
 | `registry` | Registry keys/values | `apt-registry.yar` |
 | `log` | Log files, eventlogs | `suspicious-log.yar` |
 | `process` or `memory` | Process memory only | `inmem-process.yar` |
-| `keyword` | All string checks | `evil-keyword.yar` |
+| `keyword` | THOR module output strings | `evil-keyword.yar` |
 | `meta` | All files (first 2KB + externals) | `quick-meta.yar` |
+
+**Critical distinction:** Generic rules scan **file content** and **memory**. Keyword rules scan **THOR's internal module output** (e.g., scheduled task names, service configurations, registry paths). Without the `keyword` tag, your rule won't match module-generated strings even with `limit = "ModuleName"`.
+
+## Keyword YARA Rules for Module Output
+
+Some THOR modules parse structured data (scheduled tasks, services, registry, etc.) and output strings. To match against these outputs, use **keyword YARA rules** (filename must contain `keyword`).
+
+**Example:** Detecting suspicious scheduled task names
+
+```yara
+// Filename: redkitten-tasks-keyword.yar
+rule KEYWORD_ScheduledTasks_RedKitten_Feb26 {
+    meta:
+        description = "Detects scheduled task installation used in RedKitten campaign"
+        author = "Marius Benthin"
+        date = "2026-02-09"
+        reference = "https://harfanglab.io/insidethelab/redkitten-ai-accelerated-campaign-targeting-iranian-protests/"
+        limit = "ScheduledTasks"
+        score = 75
+    strings:
+        $s1 = "Enterprise Workstation Health Monitoring"
+        $s2 = /MediaSyncTask[1-9][0-9]{2}/
+    condition:
+        1 of them
+}
+```
+
+**Common mistake:** Using a generic filename like `redkitten-tasks.yar` without `keyword` in the name. This causes THOR to initialize the rule as a **default rule** (file/memory scanner), which won't match module output strings.
+
+**Modules supporting keyword YARA rules:**
+- `ScheduledTasks` - Task names, actions, triggers
+- `ServiceCheck` - Service names, image paths
+- `RegistryChecks` - Registry keys/values
+- `Autoruns` - ASEP entries
+- `ProcessCheck` - Process strings
+- `Eventlog` / `LogScan` - Log entries
+- `Mutex` / `Handles` / `Pipes` - Named objects
 
 ## THOR-Specific Meta Attributes
 

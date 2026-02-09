@@ -41,11 +41,11 @@ Filename tags determine IOC type. Tag is detected via regex `\Wc2\W` (word bound
 ### YARA Rules
 
 - **Generic rules**: Applied to files, process memory, DeepDive chunks
+- **Keyword rules** (filename must contain `keyword`): Applied to THOR module output (scheduled tasks, services, registry, etc.)
 - **Specific rules** (tag in filename):
   - `registry` - Registry key/value detection
   - `log` - Log file and eventlog detection
   - `process` or `memory` - Process memory only
-  - `keyword` - All string checks across modules
   - `meta` - All files (first 2KB + externals only)
 
 ### Sigma Rules
